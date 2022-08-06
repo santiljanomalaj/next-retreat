@@ -1,0 +1,150 @@
+scalar Upload
+
+type Trip {
+  id: Int!
+  userId: Int!
+  name: String!
+  tripVenues: [TripVenue!]!
+  shareToken: String
+  logoUrl: String
+  heroUrl: String
+  requirements: String
+  isProposal: Boolean
+  variations: [TripVariation]
+}
+
+type TripVariation {
+  id: Int!
+  prices: [VariationPrice]
+  pax: Int!
+  from: String!
+  to: String!
+}
+
+type VariationPrice {
+  id: Int
+  venueId: Int!
+  price: Float
+  isAvailable: Boolean
+}
+
+type TripVenue {
+  id: Int!
+  venue: Venue!
+  trip: Trip!
+}
+
+type TripSharedUsers {
+  email: String!
+  accessToken: String
+}
+
+input TripInput {
+  id: Int
+  shareToken: String
+}
+
+input CreateTripInput {
+  name: String!
+}
+
+input UpdateTripInput {
+  id: Int!
+  name: String!
+}
+
+input AddTripVenueInput {
+  tripId: Int!
+  venueId: Int!
+}
+
+input TripAskQuestionInput {
+  question: String!
+  venueIds: [Int!]!
+  fullName: String!
+  companyName: String!
+  email: String!
+  phoneNumber: String!
+}
+
+input DateInput {
+  from: String!
+  to: String!
+}
+
+input TripCheckAvailabilityInput {
+  exactDate: Boolean
+  nightsCount: Int
+  peopleCount: Int!
+  dateRange: DateInput!
+  venueIds: [Int!]!
+  fullName: String!
+  companyName: String!
+  companyCountry: String!
+  email: String!
+  phoneNumber: String!
+}
+
+input CreateTripVariationInput {
+  tripId: Int!
+  variations: [TripVariationInput]
+}
+
+input TripVariationInput {
+  id: Int
+  from: String!
+  to: String!
+  pax: Int!
+  prices: [TripVariationPriceInput]
+}
+
+input TripVariationPriceInput {
+  id: Int
+  price: Float
+  isAvailable: Boolean
+  venueId: Int!
+}
+
+input FetchPriceInput {
+  from: String!
+  to: String!
+  pax: Int!
+  price: TripVariationPriceInput!
+}
+
+input FetchPricesInput {
+  from: String!
+  to: String!
+  pax: Int!
+  prices: [TripVariationPriceInput!]!
+}
+
+input ShareTripInput {
+  id: Int!
+  email: String!
+  sendNotificationMail: Boolean
+}
+
+type Query {
+  trip(input: TripInput!): Trip!
+  trips: [Trip!]! @isUser
+  tripSharedUsers(id: Int!): [TripSharedUsers] @isUser
+  fetchPriceForTripVariation(input: FetchPriceInput!): VariationPrice! @isUser
+  fetchPricesForTripVariation(input: FetchPricesInput!): [VariationPrice!]! @isUser
+}
+
+type Mutation {
+  createTrip(input: CreateTripInput!): Trip! @isUser
+  updateTrip(input: UpdateTripInput!): Trip! @isUser
+  deleteTrip(id: Int!): Boolean! @isUser
+  addTripVenue(input: AddTripVenueInput): Trip! @isUser
+  removeTripVenue(id: Int!): Trip! @isUser
+  tripAskQuestion(input: TripAskQuestionInput!): Boolean!
+  tripCheckAvailability(input: TripCheckAvailabilityInput!): Boolean! @isUser
+  uploadTripLogo(file: Upload!, tripId: Int!): String! @isUser
+  removeTripLogo(tripId: Int!): Boolean! @isUser
+  saveTripVariations(input: CreateTripVariationInput!): Boolean! @isUser
+  deleteTripVariation(id: Int!): Boolean! @isUser
+  shareTripWithUser(input: ShareTripInput!): TripSharedUsers @isUser
+  deleteTripSharedUser(input: ShareTripInput!): Boolean @isUser
+}

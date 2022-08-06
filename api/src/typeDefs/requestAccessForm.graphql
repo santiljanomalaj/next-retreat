@@ -1,0 +1,19 @@
+input TrackingData {
+  utmSource : String
+  utmMedium : String
+  utmCampaign: String
+  gclid : String
+  gid: String
+}
+
+input RequestAccessFormInput {
+  email: String!
+  teamSize: Int!
+  companyName: String
+  phoneNumber: String
+  trackingData: TrackingData
+}
+
+type Mutation {
+  requestAccessForm(input: RequestAccessFormInput!): Boolean!
+}

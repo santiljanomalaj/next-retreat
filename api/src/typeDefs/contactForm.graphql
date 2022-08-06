@@ -1,0 +1,9 @@
+input ContactFormInput {
+  fullName: String!
+  email: String!
+  message: String!
+}
+
+type Mutation {
+  submitContactForm(input: ContactFormInput!): Boolean!
+}

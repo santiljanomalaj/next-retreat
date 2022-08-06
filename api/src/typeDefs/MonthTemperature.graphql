@@ -1,0 +1,5 @@
+type MonthTemperature {
+  month: String!
+  celsius: Float!
+  fahrenheit: Float!
+}

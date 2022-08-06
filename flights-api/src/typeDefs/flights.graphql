@@ -1,0 +1,74 @@
+input DestinationCityCodeInput {
+  destinationId: String!
+  cityCode: String!
+}
+
+input FlightsInput {
+  departureDates: [String]!
+  arrivalDates: [String]!
+  originLocations: [String]!
+  destination: String!
+  destinationsCityCodes: [DestinationCityCodeInput]!
+}
+
+type FlightResult {
+  date: String!
+  duration: Int!
+  price: Float!
+  unavailableFlights: [String]!
+}
+
+type Flights {
+  departures: [FlightResult]!
+  arrivals: [FlightResult]!
+} 
+
+enum FlightStatsSorterEnum {
+  OPTIMAL
+  TRAVEL_TIME
+  PRICE
+}
+
+input FlightStatsFilterInput {
+  originLocations: [String]!
+  destinations: [String]!
+  dateFrom: String
+  dateTo: String
+  destinationsCityCodes: [DestinationCityCodeInput]!
+}
+
+input FlightStatsInput {
+  filter: FlightStatsFilterInput!
+  sorter: FlightStatsSorterEnum = OPTIMAL
+}
+
+type FlightDuration {
+  originLocation: String!
+  duration: Int!
+  price: Float!
+  stepovers: Int!
+  airportTo: String!
+}
+
+type FlightStats {
+  destination: String!
+  duration: Int!
+  price: Float!
+  flightDurations: [FlightDuration]!
+  unavailableFlights: [String]!
+  dateFrom: String
+  dateTo: String
+  rank: Float
+}
+
+type AvailableFlightDates {
+  dateFrom: String!
+  dateTo: String!
+}
+
+type Query {
+  flights(input: FlightsInput!): Flights!
+  flightStats(input: FlightStatsInput!): [FlightStats]!   
+  flightStats2(input: FlightStatsInput!): [FlightStats]!
+  availableFlightDates: AvailableFlightDates!
+}

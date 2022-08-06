@@ -1,0 +1,20 @@
+input FlightOptionsGridInput {
+  arrivalDates: [String]!
+  departureDates: [String]!
+  originLocations: [String]!
+  destination: String!
+}
+
+type FlightResult {
+  date: String!
+  unavailableFlights: [String]!
+}
+
+type FlightOptionsGridResults {
+  arrivals: [FlightResult]!
+  departures: [FlightResult]!
+}
+
+type Query {
+  flightOptionsGrid(input: FlightOptionsGridInput!): FlightOptionsGridResults!
+}

@@ -1,0 +1,13 @@
+input PaginationInput {
+  page: Int = 0
+  limit: Int = 20
+}
+
+type PaginationInfo {
+  totalCount: Int!
+  firstPage: Int!
+  lastPage: Int!
+  currentPage: Int!
+  nextPage: Int
+  previousPage: Int
+}

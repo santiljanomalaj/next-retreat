@@ -1,0 +1,84 @@
+{
+  "name": "next-retreat-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test:watch": "jest --watch",
+    "test": "jest",
+    "db:migrate:latest": "npx knex migrate:latest --knexfile config/db.js",
+    "db:migrate:down": "npx knex migrate:down --knexfile config/db.js",
+    "db:migrate:rollback:all": "npx knex migrate:rollback --all --knexfile config/db.js",
+    "db:migrate:list": "npx knex migrate:list --knexfile config/db.js",
+    "db:migrate:up": "npx knex migrate:up --knexfile config/db.js",
+    "db:seed": "npx knex seed:run --knexfile config/db.js",
+    "start:dev": "nodemon --inspect=0.0.0.0:9229 src/index.js",
+    "start": "node src/index.js",
+    "db:reset": "node scripts/resetDatabase",
+    "db:recreate": "npm run db:migrate:rollback:all && npm run db:migrate:latest && npm run db:seed",
+    "priceline": "node scripts/staticDataCli.js",
+    "syncCurrencyRates": "node scripts/currencyRatesSync.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudolabs-io/next-retreat.git"
+  },
+  "author": "sudolabs.io",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudolabs-io/next-retreat/issues"
+  },
+  "homepage": "https://github.com/sudolabs-io/next-retreat#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.28.0",
+    "@aws-sdk/lib-storage": "^3.28.0",
+    "@sendgrid/mail": "^7.4.6",
+    "@sentry/node": "^5.30.0",
+    "apollo-errors": "^1.9.0",
+    "currency.js": "^2.0.4",
+    "dataloader": "^2.0.0",
+    "date-fns": "^2.23.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "geolib": "^3.3.1",
+    "graphql-middleware-sentry": "^3.2.1",
+    "graphql-yoga": "^1.18.3",
+    "knex": "^0.95.10",
+    "lodash.orderby": "^4.6.0",
+    "lodash.uniq": "^4.5.0",
+    "merge-graphql-schemas": "^1.7.8",
+    "nanoid": "^3.1.25",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.1",
+    "objection": "^2.2.15",
+    "pg": "^8.7.1",
+    "query-string": "^7.0.1",
+    "request-ip": "^2.1.3",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^22.7.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^2.2.0",
+    "jest": "^24.8.0",
+    "lint-staged": "^8.1.6",
+    "nodemon": "^2.0.12",
+    "prettier": "^1.17.0"
+  },
+  "engines": {
+    "node": "14.17.5"
+  },
+  "husky": {
+    "hooks": {}
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "git add"
+    ]
+  }
+}

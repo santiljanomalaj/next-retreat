@@ -1,0 +1,39 @@
+enum ResultType {
+  CITY
+  UNSUPPORTED_CITY
+  COUNTRY
+  ALREADY_ADDED
+}
+
+type OriginLocation {
+  id: String!
+  code: String!
+  name: String!
+  country: String!
+  countryCode: String!
+  coordinates: Coordinates!
+  type: ResultType
+}
+
+type SearchResults {
+  title: String
+  type: ResultType
+  suggestions: [OriginLocation]!
+}
+
+input OriginLocationsInput {
+  ids: [String]
+  selectedOriginLocations: [String]!
+}
+
+input SearchLocationsInput {
+  search: String
+  selectedOriginLocations: [String]!
+}
+
+type Query {
+  searchLocations(filter: SearchLocationsInput): [SearchResults]!
+  originLocations(filter: OriginLocationsInput): [OriginLocation]!
+  validateOriginLocations(locations: [String]!): Boolean
+  availableOriginLocationCodes: [String]!
+}

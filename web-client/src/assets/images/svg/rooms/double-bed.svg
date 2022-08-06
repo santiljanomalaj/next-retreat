@@ -1,0 +1,11 @@
+<svg width="62" height="44" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 33V43" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M61 33V43" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M55 9.5V2C55 1.44772 54.5523 1 54 1H8C7.44771 1 7 1.44772 7 2V9.5" fill="#DBDFE7"/>
+<path d="M55 9.5V2C55 1.44772 54.5523 1 54 1H8C7.44771 1 7 1.44772 7 2V9.5" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M5 18.5V12.1667C5 10.425 6.8 9 9 9H27C29.2 9 31 10.425 31 12.1667V18.5" fill="white"/>
+<path d="M5 18.5V12.1667C5 10.425 6.8 9 9 9H27C29.2 9 31 10.425 31 12.1667V18.5" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M31 18.5V12.1667C31 10.425 32.8 9 35 9H53C55.2 9 57 10.425 57 12.1667V18.5" fill="white"/>
+<path d="M31 18.5V12.1667C31 10.425 32.8 9 35 9H53C55.2 9 57 10.425 57 12.1667V18.5" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M59 19H3C1.89543 19 1 19.8954 1 21V33H61V21C61 19.8954 60.1046 19 59 19Z" fill="#DBDFE7" stroke="#465061" stroke-miterlimit="10" stroke-linecap="square"/>
+</svg>

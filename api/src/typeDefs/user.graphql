@@ -1,0 +1,35 @@
+type SharedTrips {
+  id: Int!
+  userId: Int!
+  tripId: Int!
+  trips: [Trip!]!
+}
+type User {
+  id: Int!
+  email: String!
+  accessToken: String
+  trips: [Trip!]!
+  sharedTrips:[SharedTrips!]!
+}
+
+input SignUpInput {
+  email: String!
+  searchState: String
+  trackingData: TrackingData
+}
+
+input TrackingData {
+  utm_source: String
+  utm_medium: String
+  utm_campaign: String
+  gid: String
+  gclid: String
+}
+
+type Query {
+  userMe: User
+}
+
+type Mutation {
+  signUp(input: SignUpInput!): User!
+}

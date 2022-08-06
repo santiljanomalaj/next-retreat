@@ -1,0 +1,172 @@
+enum VenueSorterEnum {
+  OPTIMAL
+  TRAVEL_TIME
+  PRICE
+}
+
+enum RetreatTypeEnum {
+  BALANCED
+  WORK
+  LEISURE
+}
+
+enum VenueTypesEnum {
+  APARTMENT
+  HOTEL
+  HOUSE
+  OTHER
+}
+
+input RoomIdsWithCounts {
+  id: String!
+  count: Int!
+}
+
+input VenuesFilterInput {
+  originLocations: [String]!
+  destination: String!
+  teamSize: Int!
+  dateFromUtc: String
+  dateToUtc: String
+  numberOfRooms: Int
+  priceFrom: PriceInput
+  priceTo: PriceInput
+  type: [VenueTypesEnum]
+  retreatType: RetreatTypeEnum
+  isMeetingRoomIncluded: Boolean
+  isPromotedOnly: Boolean
+}
+
+input VenuesInput {
+  filter: VenuesFilterInput
+  sorter: VenueSorterEnum = OPTIMAL
+  pagination: PaginationInput
+}
+
+input VenueInput {
+  id: Int!
+  dateFromUtc: String
+  dateToUtc: String
+  currencyIsoCode: String
+  roomIdsWithCounts: [RoomIdsWithCounts]
+}
+
+type NearestAirport {
+  distanceInKilometers: Float!
+  name: String!
+  code: String!
+}
+
+type CancelationPolicy {
+  isCancelable: Boolean!
+  description: String!
+}
+
+type BeddingData {
+  bedCount: Int
+  bedType: String
+}
+
+type Room {
+  id: String!
+  title: String!
+  description: String!
+  cancelationPolicy: CancelationPolicy!
+  ratePlanCode: String!
+  occupancyLimit: Int!
+  pricePerNight: Price!
+  taxesAndFees: Price!
+  subtotal: Price!
+  resortFee: Price!
+  total: Price!
+  thumbnailUrls: [String]!
+  quantity: Int!
+  boardType: String!
+  beddingData: [BeddingData]
+  icon: String!
+  subtotalSum: Price
+  taxesAndFeesSum: Price
+  totalSum: Price
+}
+
+type Bed {
+  name: String!
+  count: Int!
+}
+
+type Bedroom {
+  title: String!
+  beddingData: [Bed]!
+}
+
+type AirportDistance {
+  code: String!
+  distanceInKilometers: Float!
+}
+
+type HouseRules {
+  checkIn: String!
+  checkOut: String!
+  cancellationDescription: String!
+  roomTypeAssignmentDescription: String!
+}
+
+type RoomData {
+  rooms: [Room]
+  totalPrice: Price
+  totalTaxesAndFees: Price
+  totalResortFees: Price
+}
+
+type Venue {
+  id: String!
+  destinationId: String!
+  thumbnailUrl: String @deprecated(reason: "Use thumbnailUrls instead")
+  thumbnailUrls(limit: Int): [String]!
+  type: String!
+  destination: String!
+  rating: Float!
+  starRating: Int!
+  title: String!
+  address: String!
+  nearestAirport: NearestAirport!
+    @deprecated(reason: "Use nearestAirports instead")
+  nearestAirports: [NearestAirport]!
+  numberOfRooms: Int!
+  isMeetingRoomIncluded: Boolean!
+  roomData: RoomData
+  taxesData: [String]
+  price: Price
+  priceTotal: Price
+  coordinates: Coordinates!
+  airportsCoordinates: [Coordinates]!
+    @deprecated(reason: "Use airportData instead")
+  airportDistances: [AirportDistance]!
+  description: String
+  amenities: [String]
+  avgTemperaturesByMonth: [MonthTemperature]!
+  houseRules: HouseRules!
+  hotelidPpn: Int
+  isPromoted: Boolean!
+  countryCode: String
+  country: String
+  capacity: Int
+  source: String
+}
+
+type FilterData {
+  priceMin: Price!
+  priceMax: Price!
+}
+
+type Venues {
+  data: [Venue]!
+  filterData: FilterData
+  airportData: [Airport]
+  paginationInfo: PaginationInfo
+}
+
+type Query {
+  venues(input: VenuesInput): Venues!
+  venue(input: VenueInput!): Venue!
+}

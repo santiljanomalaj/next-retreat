@@ -1,0 +1,6 @@
+export const TRAVEL_TYPES = {
+  UNAVAILABLE: 'UNAVAILABLE',
+  DRIVING: 'DRIVING',
+  FLIGHT: 'FLIGHT',
+  NONE: 'NONE',
+}

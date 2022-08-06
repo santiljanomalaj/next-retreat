@@ -1,0 +1,1 @@
+directive @isUser on QUERY | FIELD_DEFINITION | MUTATION

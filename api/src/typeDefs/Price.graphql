@@ -1,0 +1,8 @@
+input PriceInput {
+  amount: Float
+}
+
+type Price {
+  amount: Float!
+  currencyIsoCode: String!
+}

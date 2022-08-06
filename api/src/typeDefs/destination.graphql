@@ -1,0 +1,108 @@
+enum DestinationSorterEnum {
+  OPTIMAL
+  TRAVEL_TIME
+  PRICE
+}
+
+enum DestinationType {
+  MOUNTAINS
+  BEACH
+  CITY
+}
+
+enum TravelType {
+  UNAVAILABLE
+  DRIVING
+  FLIGHT
+  NONE
+}
+
+input DestinationsFilterInput {
+  domesticTravelCountryCode: String
+  originLocations: [String]!
+  type: [DestinationType]
+  monthFromUtc: String
+  monthToUtc: String
+}
+
+input DestinationsInput {
+  filter: DestinationsFilterInput!
+  sorter: DestinationSorterEnum = OPTIMAL
+  pagination: PaginationInput!
+}
+
+input DestinationInput {
+  id: String!
+  originLocations: [String]!
+}
+
+input DestinationSuggestionInput {
+  destination: String!
+  name: String!
+  email: String!
+}
+
+type FlightDuration {
+  originLocation: String!
+  duration: Int!
+}
+
+type TravelDuration {
+  originLocation: String!
+  duration: Int
+  coordinates: Coordinates!
+  type: TravelType!
+  price: Int
+  stepovers: Int
+  airportTo: String
+}
+
+type Destination {
+  id: String!
+  title: String!
+  avgPrice: Price!
+  pictureUrl: String!
+  types: [DestinationType]!
+  avgTravelTimeInMinutes: Float!
+  avgTemperaturesByMonth: [MonthTemperature]!
+  description: String!
+  coordinates: Coordinates!
+  country: String!
+  countryCode: String!
+  airports: [Airport]!
+  availableOriginLocationIds: [String]!
+  unavailableOriginLocationIds: [String]!
+  flightDurations: [FlightDuration] @deprecated(reason: "Use travelDurations instead")
+  travelDurations: [TravelDuration]!
+  rank: Float
+  kiwiCityId: String
+  isDomestic: Boolean!
+}
+
+type Destinations {
+  data: [Destination]!
+  originLocations: [OriginLocation]!
+  paginationInfo: PaginationInfo
+}
+
+type AvailableDestinationsDates {
+  dateFrom: String!
+  dateTo: String!
+}
+
+type DestinationCityCode {
+  destinationId: String!
+  cityCode: String!
+}
+
+type Query {
+  destinations(input: DestinationsInput!): Destinations
+  destination(input: DestinationInput!): Destination
+  availableDestinations: [Destination]
+  availableDestinationsDates: AvailableDestinationsDates!
+  destinationsCityCodes: [DestinationCityCode]!
+}
+
+type Mutation {
+  insertDestinationSuggestion(input: DestinationSuggestionInput!): Boolean!
+}

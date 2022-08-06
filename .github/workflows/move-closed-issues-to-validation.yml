@@ -1,0 +1,15 @@
+name: Move closed issues into Validation
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.1.0
+        with:
+          project: Backlog
+          column: Validation
+          repo-token: ${{ secrets.GH_ACCESS_TOKEN }}

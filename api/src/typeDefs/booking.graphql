@@ -1,0 +1,79 @@
+enum AdditionalServicesTypes {
+  WIFI
+  INSURANCE
+  ACTIVITIES
+  TRANSPORTATION
+  FOOD
+  OTHER
+}
+
+input BookingOriginLocationsInput {
+  city: String!
+  size: Int!
+}
+
+input BookingRoomInput {
+  id: String!
+  quantity: Int!
+  title: String!
+  boardType: String!
+  pricePerNight: Float!
+  resortFee: Float!
+  subtotal: Float!
+  taxesAndFees: Float!
+  total: Float!
+  occupancyLimit: Int!
+  cancelationPolicy: String!
+}
+
+input CountryInput {
+  code: String!
+  name: String!
+}
+
+input BookingInput {
+  userId: Int
+  venueId: String!
+  hotelidPpn: Int
+  hotelName: String!
+  originLocations: [BookingOriginLocationsInput]!
+  checkInDate: String!
+  checkOutDate: String!
+  roomData: [BookingRoomInput]!
+  email: String!
+  phoneNumber: String!
+  name: String!
+  companyName: String!
+  currencyIsoCode: String!
+  notes: String
+  country: CountryInput!
+  vatNumber: String
+  companyAddress: String
+  additionalServices: [AdditionalServicesTypes]!
+  totalPrice: Float!
+  totalTaxesAndFees: Float!
+  totalResortFees: Float!
+  maxTeamSize: Int!
+  url: String!
+}
+
+type BookingPrice {
+  amount: Float!
+  currencyIsoCode: String!
+  depositPercentage: Float
+}
+
+type BookingOriginLocations {
+  city: String!
+  count: Int!
+}
+
+type BookingRoomData {
+  id: String!
+  title: String!
+  count: Int!
+}
+
+type Mutation {
+  requestBooking(input: BookingInput): Int!
+}

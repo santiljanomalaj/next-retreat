@@ -1,0 +1,50 @@
+[
+  {
+    "month": "Jan",
+    "celsius": -5
+  },
+  {
+    "month": "Feb",
+    "celsius": -14
+  },
+  {
+    "month": "Mar",
+    "celsius": 0
+  },
+  {
+    "month": "Apr",
+    "celsius": 5
+  },
+  {
+    "month": "May",
+    "celsius": 15
+  },
+  {
+    "month": "Jun",
+    "celsius": 25
+  },
+  {
+    "month": "Jul",
+    "celsius": 38
+  },
+  {
+    "month": "Aug",
+    "celsius": 19
+  },
+  {
+    "month": "Sep",
+    "celsius": 10
+  },
+  {
+    "month": "Oct",
+    "celsius": 7
+  },
+  {
+    "month": "Nov",
+    "celsius": 1
+  },
+  {
+    "month": "Dec",
+    "celsius": -19
+  }
+]

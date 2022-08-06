@@ -1,0 +1,5 @@
+type Airport {
+  name: String!
+  code: String!
+  coordinates: Coordinates!
+}
